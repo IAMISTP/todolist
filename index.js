@@ -1,11 +1,19 @@
 "use strict";
 const formBtn = document.querySelector(".form__btn");
+const ul = document.querySelector(".section__ul");
 formBtn === null || formBtn === void 0 ? void 0 : formBtn.addEventListener("click", () => {
-    const ul = document.querySelector(".section__ul");
     let inputTxt = getInputValue();
     if (typeof inputTxt === "string") {
         const item = createItem(inputTxt);
         ul === null || ul === void 0 ? void 0 : ul.appendChild(item);
+    }
+});
+ul === null || ul === void 0 ? void 0 : ul.addEventListener("click", (event) => {
+    if (event.target instanceof HTMLElement) {
+        const li = event.target.closest("li");
+        (li === null || li === void 0 ? void 0 : li.classList.contains("selected"))
+            ? li === null || li === void 0 ? void 0 : li.classList.remove("selected")
+            : li === null || li === void 0 ? void 0 : li.classList.add("selected");
     }
 });
 function getInputValue() {
@@ -15,7 +23,9 @@ function getInputValue() {
             inputTag.focus();
         }
         else {
-            return inputTag.value;
+            let result = inputTag.value;
+            inputTag.value = "";
+            return result;
         }
     }
 }
@@ -25,13 +35,10 @@ function createItem(text) {
     itemRow.setAttribute("class", "section__li");
     itemRow.setAttribute("data-id", id.toString());
     itemRow.innerHTML = `
-  <div class="item" data-id=${id}>
-    <span class="item__name">${text}</span>
+    <span class="span item__name" data-id=${id}>${text}</span>
     <button class="item__delete">
       <i class="fa-solid fa-trash" data-id=${id}></i>
     </button>
-  </div>
-  <div class="item__divider"></div>
     `;
     id++;
     return itemRow;

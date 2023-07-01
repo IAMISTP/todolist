@@ -1,12 +1,20 @@
 const formBtn = document.querySelector(".form__btn");
 
+const ul = document.querySelector(".section__ul");
 formBtn?.addEventListener("click", () => {
-  const ul = document.querySelector(".section__ul");
-
   let inputTxt = getInputValue();
   if (typeof inputTxt === "string") {
     const item = createItem(inputTxt);
     ul?.appendChild(item);
+  }
+});
+
+ul?.addEventListener("click", (event) => {
+  if (event.target instanceof HTMLElement) {
+    const li = event.target.closest("li");
+    li?.classList.contains("selected")
+      ? li?.classList.remove("selected")
+      : li?.classList.add("selected");
   }
 });
 
@@ -16,7 +24,9 @@ function getInputValue(): string | undefined {
     if (inputTag.value === "") {
       inputTag.focus();
     } else {
-      return inputTag.value;
+      let result = inputTag.value;
+      inputTag.value = "";
+      return result;
     }
   }
 }
@@ -27,13 +37,10 @@ function createItem(text: string): HTMLLIElement {
   itemRow.setAttribute("class", "section__li");
   itemRow.setAttribute("data-id", id.toString());
   itemRow.innerHTML = `
-  <div class="item" data-id=${id}>
-    <span class="item__name">${text}</span>
+    <span class="span item__name" data-id=${id}>${text}</span>
     <button class="item__delete">
       <i class="fa-solid fa-trash" data-id=${id}></i>
     </button>
-  </div>
-  <div class="item__divider"></div>
     `;
   id++;
   return itemRow;
