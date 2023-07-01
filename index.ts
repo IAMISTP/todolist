@@ -7,6 +7,20 @@ formBtn?.addEventListener("click", () => {
     const item = createItem(inputTxt);
     ul?.appendChild(item);
   }
+  ul?.addEventListener("click", (event) => {
+    if (event.target instanceof HTMLElement) {
+      const id = event.target.dataset.id;
+
+      const toBeDeleted = document.querySelector(
+        `.section__li[data-id="${id}"]`
+      );
+      console.log(toBeDeleted);
+
+      if (event.target.tagName === "I") {
+        toBeDeleted?.remove();
+      }
+    }
+  });
 });
 
 ul?.addEventListener("click", (event) => {
@@ -38,7 +52,7 @@ function createItem(text: string): HTMLLIElement {
   itemRow.setAttribute("data-id", id.toString());
   itemRow.innerHTML = `
     <span class="span item__name" data-id=${id}>${text}</span>
-    <button class="item__delete">
+    <button class="item__delete btn">
       <i class="fa-solid fa-trash" data-id=${id}></i>
     </button>
     `;

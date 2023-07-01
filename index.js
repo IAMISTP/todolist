@@ -7,6 +7,16 @@ formBtn === null || formBtn === void 0 ? void 0 : formBtn.addEventListener("clic
         const item = createItem(inputTxt);
         ul === null || ul === void 0 ? void 0 : ul.appendChild(item);
     }
+    ul === null || ul === void 0 ? void 0 : ul.addEventListener("click", (event) => {
+        if (event.target instanceof HTMLElement) {
+            const id = event.target.dataset.id;
+            const toBeDeleted = document.querySelector(`.section__li[data-id="${id}"]`);
+            console.log(toBeDeleted);
+            if (event.target.tagName === "I") {
+                toBeDeleted === null || toBeDeleted === void 0 ? void 0 : toBeDeleted.remove();
+            }
+        }
+    });
 });
 ul === null || ul === void 0 ? void 0 : ul.addEventListener("click", (event) => {
     if (event.target instanceof HTMLElement) {
@@ -36,7 +46,7 @@ function createItem(text) {
     itemRow.setAttribute("data-id", id.toString());
     itemRow.innerHTML = `
     <span class="span item__name" data-id=${id}>${text}</span>
-    <button class="item__delete">
+    <button class="item__delete btn">
       <i class="fa-solid fa-trash" data-id=${id}></i>
     </button>
     `;
