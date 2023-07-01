@@ -1,6 +1,6 @@
 const formBtn = document.querySelector(".form__btn");
-
 const ul = document.querySelector(".section__ul");
+
 formBtn?.addEventListener("click", () => {
   let inputTxt = getInputValue();
   if (typeof inputTxt === "string") {
@@ -11,10 +11,10 @@ formBtn?.addEventListener("click", () => {
 
 ul?.addEventListener("click", (event) => {
   if (event.target instanceof HTMLElement) {
-    const li = event.target.closest("li");
-    li?.classList.contains("selected")
-      ? li?.classList.remove("selected")
-      : li?.classList.add("selected");
+    const span = event.target.closest("span");
+    span?.classList.contains("selected")
+      ? span?.classList.remove("selected")
+      : span?.classList.add("selected");
   }
 });
 

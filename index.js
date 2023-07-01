@@ -10,10 +10,10 @@ formBtn === null || formBtn === void 0 ? void 0 : formBtn.addEventListener("clic
 });
 ul === null || ul === void 0 ? void 0 : ul.addEventListener("click", (event) => {
     if (event.target instanceof HTMLElement) {
-        const li = event.target.closest("li");
-        (li === null || li === void 0 ? void 0 : li.classList.contains("selected"))
-            ? li === null || li === void 0 ? void 0 : li.classList.remove("selected")
-            : li === null || li === void 0 ? void 0 : li.classList.add("selected");
+        const span = event.target.closest("span");
+        (span === null || span === void 0 ? void 0 : span.classList.contains("selected"))
+            ? span === null || span === void 0 ? void 0 : span.classList.remove("selected")
+            : span === null || span === void 0 ? void 0 : span.classList.add("selected");
     }
 });
 function getInputValue() {
